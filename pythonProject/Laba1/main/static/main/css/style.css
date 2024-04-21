@@ -1,0 +1,26 @@
+.qwerty{
+    color: green;
+}
+.pa{
+    color: green;
+}
+
+.card {
+    border: 1px solid;
+    border-radius: 8px;
+    margin: 20px;
+    padding: 20px;
+    width: 300px;
+    display: inline-block;
+}
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+.card h2 {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+.card p {
+    color: #555;
+}

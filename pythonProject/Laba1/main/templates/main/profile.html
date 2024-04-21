@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{%  block title %}Страница профиля{% endblock %}
+
+{% block content %}
+
+<h1> Добро пожаловать, {{ user.username }}</h1>
+
+
+<form action="{% url 'logout' %}?next=/profile" method="post">
+  {% csrf_token %}
+  <button type="submit">Выйти из аккаунта</button>
+</form>
+{% endblock %}

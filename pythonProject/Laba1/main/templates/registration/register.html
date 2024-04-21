@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{%  block title %}Регистрация{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" method="post">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Имя пользователя"/>
+      <input type="password" name="password1" placeholder="Пароль"/>
+      <input type="password" name="password2" placeholder="Подтвердите пароль"/>
+      <input type="submit" value="Создать"/>
+<!--      <button>Создать</button>-->
+      <p class="message">Уже зарегистрированы? <a href="/profile">Войти</a></p>
+      {{ form.errors }}
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

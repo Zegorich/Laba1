@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{%  block title %}главная страница{% endblock %}
+
+{% block content %}
+<!--        <div class="qwerty"><h1>Главная страница</h1>-->
+<!--        <p>Главная страница</p></div>-->
+
+
+
+{% for p in products %}
+    <div class="card">
+        <img src="{{  p.img.url }}" alt="{{ p.name }}" width="200" height="200">
+        <h2>{{ p.name }}</h2>
+        <p>{{ p.extra_info }}</p>
+        <p>Цена: RUB {{ p.price }}</p>
+        <a href="/buy"><button>Добавить в корзину</button></a>
+
+    </div>
+    {% endfor %}
+{% endblock %}
