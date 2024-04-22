@@ -29,12 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CART_SESSION_ID ='cart'
 
 # Application definition
 
 INSTALLED_APPS = [
-    'cart',
     'main',
     'django.contrib.admin',
     'django.contrib.auth',

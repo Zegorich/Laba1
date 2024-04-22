@@ -14,11 +14,7 @@
         <h2>{{ p.name }}</h2>
         <p>{{ p.extra_info }}</p>
         <p>Цена: RUB {{ p.price }}</p>
-        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-            <input type="submit" value="B корзину">
-        </form>
+
 
     </div>
     {% endfor %}
