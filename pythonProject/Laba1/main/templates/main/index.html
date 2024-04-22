@@ -3,19 +3,19 @@
 {%  block title %}главная страница{% endblock %}
 
 {% block content %}
-<!--        <div class="qwerty"><h1>Главная страница</h1>-->
-<!--        <p>Главная страница</p></div>-->
 
+    {% for p in products %}
+        <div class="card">
+            <img src="{{  p.img.url }}" alt="{{ p.name }}" width="200" height="200">
+            <h2>{{ p.name }}</h2>
+            <p>{{ p.extra_info }}</p>
+            <p>Цена: RUB {{ p.price }}</p>
+            <form action="{% url 'main:add_to_cart' p.id %}" method="post">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <input type="submit" value="B корзину">
+              </form>
 
-
-{% for p in products %}
-    <div class="card">
-        <img src="{{  p.img.url }}" alt="{{ p.name }}" width="200" height="200">
-        <h2>{{ p.name }}</h2>
-        <p>{{ p.extra_info }}</p>
-        <p>Цена: RUB {{ p.price }}</p>
-
-
-    </div>
+        </div>
     {% endfor %}
 {% endblock %}

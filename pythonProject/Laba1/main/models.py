@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from django.urls import reverse
 
 class Product(models.Model):
     name = models.CharField('Имя товара', max_length = 100)
@@ -9,6 +10,7 @@ class Product(models.Model):
     extra_info = models.TextField('Дополнительная информация', max_length = 1000)
     amount = models.FloatField('Количество товара')
     rest = models.FloatField('Осталось товаров')
+    quantity = models.IntegerField('Кол-во товаров', default = 1)
 
     def __str__(self):
         return self.name
@@ -26,3 +28,14 @@ class User(AbstractUser):
     debt = models.FloatField(verbose_name='Долг долг клиента', blank=True, null=True)
     credit_remain = models.FloatField(verbose_name='Остаток по кредиту', blank=True, null=True)
     extra_info = models.TextField(verbose_name='Дополнительная информация', max_length = 1000, blank=True, null=True)
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product}"
+
+    def get_absolute_url(self):
+        return reverse("main:cart_detail")

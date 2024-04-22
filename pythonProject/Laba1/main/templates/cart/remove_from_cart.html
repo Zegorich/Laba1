@@ -1,0 +1,10 @@
+{% extends 'main/layout.html' %}
+{% block content %}
+   
+    {{ message }}
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Remove from Cart">
+    </form>
+{% endblock %}

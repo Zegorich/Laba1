@@ -1,0 +1,41 @@
+{% extends 'main/layout.html' %}
+{% block content %}
+
+    {% if cart_items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.quantity}}</td>
+<!--                        вместо item.quantity должно быть что-то типо
+item.quantity * Product.objects.get(id=item.product).price-->
+                        <td><a href="{% url 'main:remove_from_cart' item.id %}">Remove</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Total:</td>
+                    <td>{{ total_price }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+    {% else %}
+        <p>Your shopping cart is empty.</p>
+    {% endif %}
+{% endblock %}
