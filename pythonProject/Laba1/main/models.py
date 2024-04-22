@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
 class Product(models.Model):
     name = models.CharField('Имя товара', max_length = 100)
     price = models.FloatField('Стоимость товара')
@@ -14,6 +16,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
+
 
 class User(AbstractUser):
     name = models.CharField(verbose_name='ФИО', blank=True, null=True, max_length = 100)
