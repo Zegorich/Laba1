@@ -33,9 +33,27 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.CharField(max_length=255)
     quantity = models.IntegerField(default=1)
+    price = models.FloatField('Стоимость товара', default=1)
+    QP = models.FloatField('Сумма стоимости товаров 1-го вида', default=1)
 
     def __str__(self):
         return f"{self.quantity} x {self.product}"
 
     def get_absolute_url(self):
         return reverse("main:cart_detail")
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    product = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=1)
+
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'

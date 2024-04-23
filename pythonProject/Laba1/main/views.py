@@ -15,7 +15,7 @@ def index(request):
     products = Product.objects.all()
     if request.method == "POST":
         messages.success(request, f"{products.name} added to your cart.")
-        return redirect("main:add_to_cart", product_id=products.id)
+        return redirect("main:add_to_cart", product_name=products.name)
     return render(request, 'main/index.html', {'products': products})
 
 @login_required
@@ -31,15 +31,15 @@ class register_view(FormView):
         return super().form_valid(form)
 
 @login_required
-def add_to_cart(request, product_id):
-    cart_item = Cart.objects.filter(user=request.user, product=product_id).first()
+def add_to_cart(request, product_name):
+    cart_item = Cart.objects.filter(user=request.user, product=product_name).first()
 
     if cart_item:
         cart_item.quantity += 1
         cart_item.save()
         messages.success(request, "Item added to your cart.")
     else:
-        Cart.objects.create(user=request.user, product=product_id)
+        Cart.objects.create(user=request.user, product=product_name)
         messages.success(request, "Item added to your cart.")
 
     return redirect("main:cart_detail")
@@ -57,12 +57,15 @@ def remove_from_cart(request, cart_item_id):
 @login_required
 def cart_detail(request):
     cart_items = Cart.objects.filter(user=request.user)
-    total_price = sum(item.quantity * Product.objects.get(id=item.product).price for item in cart_items)
+    # *Product.objects.get(name=item.product).price
+    for item in cart_items:
+        item.price = Product.objects.get(name=item.product).price
+        item.QP = item.quantity * item.price
+    total_price = sum(item.quantity * item.price for item in cart_items)
 
     context = {
         "cart_items": cart_items,
         "total_price": total_price,
-        "products": Product.objects.all(),
     }
 
     return render(request, "cart/cart_detail.html", context)

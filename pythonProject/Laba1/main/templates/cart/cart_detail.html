@@ -17,10 +17,8 @@
                     <tr>
                         <td>{{ item.product }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>{{ item.product.price }}</td>
-                        <td>{{ item.quantity}}</td>
-<!--                        вместо item.quantity должно быть что-то типо
-item.quantity * Product.objects.get(id=item.product).price-->
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.QP }}</td>
                         <td><a href="{% url 'main:remove_from_cart' item.id %}">Remove</a></td>
                     </tr>
                 {% endfor %}
@@ -33,8 +31,6 @@ item.quantity * Product.objects.get(id=item.product).price-->
                 </tr>
             </tfoot>
         </table>
-
-
     {% else %}
         <p>Your shopping cart is empty.</p>
     {% endif %}
