@@ -56,8 +56,9 @@ def remove_from_cart(request, cart_item_id):
 
 @login_required
 def cart_detail(request):
+
     cart_items = Cart.objects.filter(user=request.user)
-    # *Product.objects.get(name=item.product).price
+    print(cart_items)
     for item in cart_items:
         item.price = Product.objects.get(name=item.product).price
         item.QP = item.quantity * item.price
@@ -70,3 +71,16 @@ def cart_detail(request):
 
     return render(request, "cart/cart_detail.html", context)
 
+@login_required
+def orders(request):
+    user = request.user
+    cart_items = Cart.objects.filter(user=request.user)
+
+
+    # summ = sum()
+    context = {
+        "User": User,
+        # "summ": summ,
+        # ""
+    }
+    return render(request, "orders/orders_details.html", context)

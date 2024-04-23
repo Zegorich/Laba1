@@ -10,7 +10,6 @@ class Product(models.Model):
     extra_info = models.TextField('Дополнительная информация', max_length = 1000)
     amount = models.FloatField('Количество товара')
     rest = models.FloatField('Осталось товаров')
-    quantity = models.IntegerField('Кол-во товаров', default = 1)
 
     def __str__(self):
         return self.name
@@ -22,7 +21,6 @@ class Product(models.Model):
 
 class User(AbstractUser):
     name = models.CharField(verbose_name='ФИО', blank=True, null=True, max_length = 100)
-    summ = models.FloatField(verbose_name='Сумма всех покупок', blank=True, null=True)
     balance = models.FloatField(verbose_name='Баланс', blank=True, null=True)
     credit_limit = models.FloatField(verbose_name='Кредит', blank=True, null=True)
     debt = models.FloatField(verbose_name='Долг долг клиента', blank=True, null=True)
@@ -45,11 +43,7 @@ class Cart(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    product = models.CharField(max_length=255)
-    quantity = models.IntegerField(default=1)
-
-
+    summ = models.FloatField(verbose_name='Сумма всех покупок', blank=True, null=True)
 
     def __str__(self):
         return self.name
