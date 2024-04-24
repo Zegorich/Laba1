@@ -19,15 +19,21 @@
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.price }}</td>
                         <td>{{ item.QP }}</td>
-                        <td><a href="{% url 'main:remove_from_cart' item.id %}">Remove</a></td>
+                        <td><a href="{% url 'main:remove_from_cart' item.product %}">Remove</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3"></td>
+                    <td colspan="2"></td>
                     <td>Total:</td>
                     <td>{{ total_price }}</td>
+                    <td>
+                    <form action="{% url 'main:orders' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Купить">
+                    </form>
+                    </td>
                 </tr>
             </tfoot>
         </table>

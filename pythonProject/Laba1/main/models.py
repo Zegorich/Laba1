@@ -43,11 +43,21 @@ class Cart(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    summ = models.FloatField(verbose_name='Сумма всех покупок', blank=True, null=True)
+    product = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=1)
+    price = models.FloatField('Стоимость товара', default=1)
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
     class Meta:
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
+
+class Order2(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    spent_money = models.IntegerField(default=0)
+    account_money = models.IntegerField(default=0)
+    credit_limit = models.IntegerField(default=1)
+    current_debt = models.IntegerField(default=1)
+    credit_remains = models.IntegerField(default=1)

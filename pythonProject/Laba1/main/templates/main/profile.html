@@ -7,7 +7,7 @@
 <h1> Добро пожаловать, {{ user.username }}</h1>
 
 {% if user.is_superuser %}
-<a href ="{% url 'main:orders' %}"> Смотреть все заказы </a>
+<a href ="{% url 'main:orders_detail' %}"> Смотреть все заказы </a>
 {% endif %}
 
 <form action="{% url 'logout' %}?next=/profile" method="post">
