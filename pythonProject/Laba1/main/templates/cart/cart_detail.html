@@ -1,43 +1,45 @@
 {% extends 'main/layout.html' %}
 {% block content %}
 
+<div class="container-lg" style="margin-top: 40px;">
     {% if cart_items %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total Price</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in cart_items %}
-                    <tr>
-                        <td>{{ item.product }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>{{ item.price }}</td>
-                        <td>{{ item.QP }}</td>
-                        <td><a href="{% url 'main:remove_from_cart' item.product %}">Remove</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="2"></td>
-                    <td>Total:</td>
-                    <td>{{ total_price }}</td>
-                    <td>
+    <table class="table table-bordered border-dark">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.QP }}</td>
+                <td><a href="{% url 'main:remove_from_cart' item.product %}">Remove</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>Total:</td>
+                <td>{{ total_price }}</td>
+                <td>
                     <form action="{% url 'main:orders' %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Купить">
+                        {% csrf_token %}
+                        <input class="btn btn-outline-info" type="submit" value="Купить">
                     </form>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
     {% else %}
-        <p>Your shopping cart is empty.</p>
+    <p>Your shopping cart is empty.</p>
     {% endif %}
+</div>
 {% endblock %}

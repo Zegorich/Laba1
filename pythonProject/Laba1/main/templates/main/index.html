@@ -4,18 +4,26 @@
 
 {% block content %}
 
-    {% for p in products %}
-        <div class="card">
-            <img src="{{  p.img.url }}" alt="{{ p.name }}" width="200" height="200">
-            <h2>{{ p.name }}</h2>
-            <p>{{ p.extra_info }}</p>
-            <p>Цена: RUB {{ p.price }}</p>
-            <form action="{% url 'main:add_to_cart' p.name %}" method="post">
-                {{ cart_product_form }}
-                {% csrf_token %}
-                <input type="submit" value="B корзину">
-            </form>
 
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        {% for p in products %}
+        <div class="card border border-info shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+            <img src="{{  p.img.url }}" class="card-img-top object-fit-scale border rounded" alt="{{ p.name }}" width="200" height="200">
+            <div class="card-body">
+                <h2 class="card-title">{{ p.name }}</h2>
+                <p class="card-text">{{ p.extra_info }}</p>
+                <p class="card-text">Цена: RUB {{ p.price }}</p>
+                <form action="{% url 'main:add_to_cart' p.name %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <input class="btn btn-info" type="submit" value="B корзину">
+                </form>
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+
+    </div>
+</div>
 {% endblock %}

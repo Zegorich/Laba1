@@ -17,24 +17,24 @@
 </head>
 <body>
      <nav class="navbar navbar-dark bg-dark">
+         <div class="container-lg">
+             <a class="navbar-brand" href="/">
+                 <img src="{% static 'main/img/Дом.png' %}" alt="home" width="50" height="50">
+             </a>
 
-            <a class="navbar-brand" href="/">
-              <img src="{% static 'main/img/Дом.png' %}" alt="home" width="50" height="50">
-            </a>
+             <form class="d-flex" role="search" action="" method="get">
+                 <input class="form-control me-2" name="s" id="floatingSearch" placeholder="Искать здесь..." type="search">
+                 <button class="btn btn-outline-info" type="submit">Поиск</button>
+             </form>
 
-            <form class="search-form" action="" method="get">
-                <input name="s" placeholder="Искать здесь..." type="search">
-                <button type="submit">Поиск</button>
-            </form>
+             <a class="navbar-brand" href="/cart">
+                 <img src="{% static 'main/img/корзина.png' %}" alt="cart" width="50" height="40">
+             </a>
 
-            <a class="navbar-brand" href="/cart">
-              <img src="{% static 'main/img/корзина.png' %}" alt="cart" width="50" height="40">
-            </a>
-
-            <a class="navbar-brand" href="/profile">
-              <img src="{% static 'main/img/аккаунт.png' %}" alt="account" width="50" height="50">
-            </a>
-
+             <a class="navbar-brand" href="/profile">
+                 <img src="{% static 'main/img/аккаунт.png' %}" alt="account" width="50" height="50">
+             </a>
+         </div>
       </nav>
      {% block content %}
      {% endblock %}
