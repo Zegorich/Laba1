@@ -1,15 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import FormView
-
-from .forms import RegisterForm
-
-
+from .forms import RegisterForm, NewProduct
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-
-
 from django.contrib import messages
+from django.contrib.auth.decorators import permission_required
 
 def index(request):
     products = Product.objects.all()
@@ -87,10 +83,11 @@ def orders(request):
 
     return render(request, "cart/cart_detail.html")
 
+@permission_required(perm='main.view_order2', raise_exception=True)
 def orders_detail(request):
+
     all_orders = Order.objects.filter()
     user = User.objects.filter()
-
     user_details = Order2.objects.filter()
     Order2.objects.all().delete()
     for u in user:
@@ -112,3 +109,14 @@ def orders_detail(request):
         "user_details": user_details,
     }
     return render(request, "orders/orders_detail.html", context)
+
+def add_new_item(request):
+    if request.method == "POST":
+        form = NewProduct(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            form = NewProduct()
+
+    products = Product.objects.all()
+    return render(request, 'main/index.html', {'products': products})

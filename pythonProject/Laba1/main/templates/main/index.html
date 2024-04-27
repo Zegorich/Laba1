@@ -10,7 +10,7 @@
 
         {% for p in products %}
         <div class="card border border-info shadow p-3 mb-5 bg-body-tertiary rounded text-center">
-            <img src="{{  p.img.url }}" class="card-img-top object-fit-scale border rounded" alt="{{ p.name }}" width="200" height="200">
+            <img src="{{ p.img }}" class="card-img-top object-fit-scale border rounded" alt="{{ p.name }}" width="200" height="200">
             <div class="card-body">
                 <h2 class="card-title">{{ p.name }}</h2>
                 <p class="card-text">{{ p.extra_info }}</p>
@@ -23,6 +23,18 @@
             </div>
         </div>
         {% endfor %}
+        {% if perms.main.add_product %}
+        <div class="add_card border border-info shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+            <form action="{% url 'main:add_new_item' %}" enctype='multipart/form-data' method="post">
+                {% csrf_token %}
+                <input type="file" name="img" placeholder="Изображение товара"/>
+                <input type="text" name="name" placeholder="Название товара"/>
+                <input type="text" name="extra_info" placeholder="Описание"/>
+                <input type="text" name="price" placeholder="Цена"/>
+                <input class="btn btn-info" type="submit" value="Создать товар">
+            </form>
+        </div>
+        {% endif %}
 
     </div>
 </div>

@@ -8,8 +8,8 @@ class Product(models.Model):
     price = models.FloatField('Стоимость товара')
     img = models.ImageField('Изображение товара', upload_to='img/')
     extra_info = models.TextField('Дополнительная информация', max_length = 1000)
-    amount = models.FloatField('Количество товара')
-    rest = models.FloatField('Осталось товаров')
+    amount = models.FloatField('Количество товара', default=1)
+    rest = models.FloatField('Осталось товаров', default=1)
 
     def __str__(self):
         return self.name

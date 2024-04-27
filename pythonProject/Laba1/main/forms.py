@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import BaseUserCreationForm
-from .models import User
+from django import forms
+from .models import User, Product
 
 
 class RegisterForm(BaseUserCreationForm):
@@ -7,5 +8,7 @@ class RegisterForm(BaseUserCreationForm):
         model = User
 
 
-
-
+class NewProduct(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('img', 'name', 'extra_info', 'price')
