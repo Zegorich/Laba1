@@ -32,7 +32,16 @@
                 <td>
                     <form action="{% url 'main:orders' %}" method="post">
                         {% csrf_token %}
-                        <input class="btn btn-outline-info" type="submit" value="Купить">
+                        <div class="payment-form">
+    <h2>Выберите вид оплаты</h2>
+    <div>
+        <input type="radio" id="cash" name="payment" value="cash">
+        <label for="cash">Наличный расчет</label><br>
+        <input type="radio" id="card" name="payment" value="card">
+        <label for="card">Безналичный расчет</label><br>
+        <input class="btn btn-outline-info" type="submit" value="Купить">
+    </div>
+</div>
                     </form>
                 </td>
             </tr>
