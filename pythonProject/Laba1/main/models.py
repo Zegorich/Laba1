@@ -27,6 +27,8 @@ class User(AbstractUser):
     debt = models.FloatField(verbose_name='Долг клиента', blank=True, null=True)
     credit_remain = models.FloatField(verbose_name='Остаток по кредиту', blank=True, null=True)
     extra_info = models.TextField(verbose_name='Дополнительная информация', max_length=1000, blank=True, null=True)
+    registration_code = models.IntegerField(verbose_name='Код учёта', blank=True, null=True)
+    registration_code_flag = models.BooleanField(verbose_name='без имени', blank=True, null=True, default=0)
 
 
 # Модель для корзины.

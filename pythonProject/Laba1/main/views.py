@@ -1,3 +1,4 @@
+import random
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import FormView
@@ -6,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
+
 
 # Представление для главной страницы
 def index(request):
@@ -18,6 +20,19 @@ def index(request):
 # Представление для профиля пользователя
 @login_required
 def profile_view(request):
+    user = request.user
+    if user.registration_code_flag == 0:
+        a = 0
+        user.registration_code = a
+
+    if request.method == 'POST':
+        a = random.randint(1, 1000000)
+        flag = True
+        user.registration_code = a
+
+
+        user.registration_code_flag = flag
+        user.save()
     return render(request, 'main/profile.html')
 
 # Представление для регистрации пользователя
