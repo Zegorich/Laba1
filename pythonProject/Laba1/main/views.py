@@ -99,7 +99,8 @@ def orders(request):
         order.price = Product.objects.get(name=item.product).price
         order.save()
         remove_from_cart(request, item.product)
-
+    user.balance -= sum(item.quantity * Product.objects.get(name=item.product).price for item in cart_items)
+    user.save()
     return render(request, "cart/cart_detail.html")
 
 # Представление для отображения деталей заказов

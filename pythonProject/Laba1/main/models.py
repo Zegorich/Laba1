@@ -22,7 +22,7 @@ class Product(models.Model):
 # Модель для пользователя.
 class User(AbstractUser):
     name = models.CharField(verbose_name='ФИО', blank=True, null=True, max_length=100)
-    balance = models.FloatField(verbose_name='Баланс', blank=True, null=True)
+    balance = models.FloatField(verbose_name='Баланс', blank=True, null=True, default=0)
     credit_limit = models.FloatField(verbose_name='Кредит', blank=True, null=True)
     debt = models.FloatField(verbose_name='Долг клиента', blank=True, null=True)
     credit_remain = models.FloatField(verbose_name='Остаток по кредиту', blank=True, null=True)
